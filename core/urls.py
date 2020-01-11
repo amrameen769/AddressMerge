@@ -1,6 +1,8 @@
-from django.urls import path
-from . import views
+from rest_framework import routers
+from .api import SponsorViewset
 
-urlpatterns = [
-    path('home/', views.home, name='home')
-]
+
+router = routers.DefaultRouter()
+router.register('api/sponsors', SponsorViewset, 'sponsors')
+
+urlpatterns = router.urls
