@@ -1,0 +1,2 @@
+export const GET_SPONSORS = "GET_SPONSORS";
+export const DELETE_SPONSOR = "DELETE_SPONSOR";

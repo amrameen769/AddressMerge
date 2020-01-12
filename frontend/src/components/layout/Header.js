@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
-import Navbar from "react-bootstrap/Navbar";
-import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
+import {Navbar, Nav, Form, FormControl, Button, NavDropdown} from "react-bootstrap";
+import BuildIcon from '@material-ui/icons/Build';
+import CreateIcon from '@material-ui/icons/Create';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 
 class Header extends Component {
     render() {
@@ -11,9 +12,9 @@ class Header extends Component {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav"/>
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Nav.Link href="#features">Address Book</Nav.Link>
-                        <Nav.Link href="#pricing">Sponsors</Nav.Link>
-                        <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
+                        <Nav.Link href="#features"> <MenuBookIcon/> Address Book</Nav.Link>
+                        <Nav.Link href="#pricing"><CreateIcon /> Editor</Nav.Link>
+                        <NavDropdown title="Drafted Documents" id="collasible-nav-dropdown">
                             <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
                             <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
@@ -22,9 +23,9 @@ class Header extends Component {
                         </NavDropdown>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#deets">More deets</Nav.Link>
+                        <Nav.Link href="#deets">More details</Nav.Link>
                         <Nav.Link eventKey={2} href="#memes">
-                            Dank memes
+                            Profile Settings <BuildIcon />
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
