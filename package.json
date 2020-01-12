@@ -4,7 +4,7 @@
   "description": "Word Processing and Business Information Management",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack --mode development ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
+    "dev": "webpack --mode development --watch ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
     "build": "webpack --mode production ./frontend/src/index.js --output ./frontend/static/frontend/main.js"
   },
   "repository": {
@@ -19,18 +19,34 @@
   "homepage": "https://github.com/amrameen769/AddressMerge#readme",
   "devDependencies": {
     "@babel/core": "^7.7.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.0",
     "@babel/preset-env": "^7.7.7",
     "@babel/preset-react": "^7.7.4",
-    "@material-ui/core": "^4.8.3",
+    "autoprefixer": "^9.7.3",
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-class-properties": "^6.24.1",
+    "clsx": "^1.0.4",
+    "css-loader": "^3.4.2",
+    "jquery": "^3.4.1",
+    "open-browser-webpack-plugin": "0.0.5",
+    "path": "^0.12.7",
+    "popper.js": "^1.16.0",
+    "postcss-loader": "^3.0.0",
+    "precss": "^4.0.0",
+    "sass-loader": "^8.0.1",
+    "style-loader": "^1.1.2",
     "webpack": "^4.41.5",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.10",
+    "webpack-dev-server": "^3.10.1"
   },
   "dependencies": {
     "@material-ui/icons": "^4.5.1",
+    "bootstrap": "^4.4.1",
     "prop-types": "^15.7.2",
     "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
     "react-dom": "^16.12.0"
   }
 }

@@ -9,3 +9,4 @@ class SponsorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sponsors
         fields = '__all__'
+        

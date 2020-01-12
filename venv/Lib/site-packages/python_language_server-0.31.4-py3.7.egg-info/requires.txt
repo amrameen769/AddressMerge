@@ -1,0 +1,67 @@
+jedi<0.16,>=0.14.1
+python-jsonrpc-server>=0.3.2
+pluggy
+
+[:platform_system != "Windows"]
+ujson<=1.35
+
+[:python_version < "3"]
+future>=0.14.0
+
+[:python_version < "3.0"]
+configparser
+
+[:python_version < "3.2"]
+backports.functools_lru_cache
+
+[all]
+autopep8
+flake8
+mccabe
+pycodestyle
+pydocstyle>=2.0.0
+pyflakes>=1.6.0
+pylint
+rope>=0.10.5
+yapf
+
+[autopep8]
+autopep8
+
+[flake8]
+flake8
+
+[mccabe]
+mccabe
+
+[pycodestyle]
+pycodestyle
+
+[pydocstyle]
+pydocstyle>=2.0.0
+
+[pyflakes]
+pyflakes>=1.6.0
+
+[pylint]
+pylint
+
+[rope]
+rope>0.10.5
+
+[test]
+versioneer
+pylint
+pytest
+mock
+pytest-cov
+coverage
+numpy
+pandas
+matplotlib
+
+[test:python_version >= "3"]
+pyqt5
+
+[yapf]
+yapf
