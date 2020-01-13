@@ -1,12 +1,15 @@
-import React, { Component, Fragment } from "react";
-import { connect } from "react-redux";
+import React, {Component, Fragment} from "react";
+import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import { getSponsors, deleteSponsor } from "../../actions/core";
-import { Container, Row, Card, Button } from "react-bootstrap";
+import {getSponsors, deleteSponsor, editSponsor} from "../../actions/core";
+import {Row, Card, Button} from "react-bootstrap";
 
 export class Sponsors extends Component {
     static propTypes = {
-        sponsors: PropTypes.array.isRequired
+        sponsors: PropTypes.array.isRequired,
+        deleteSponsor: PropTypes.func.isRequired,
+        getSponsors: PropTypes.func.isRequired,
+        editSponsor: PropTypes.func.isRequired
     };
 
     componentDidMount() {
@@ -14,7 +17,7 @@ export class Sponsors extends Component {
     }
 
     render() {
-        const buttonStyle = { width: "90px" };
+        const buttonStyle = {width: "90px"};
         return (
             <Fragment>
                 <h1>Sponsors List</h1>
@@ -24,16 +27,16 @@ export class Sponsors extends Component {
                             key={sponsor.id}
                             bg="dark"
                             text="white"
-                            style={{ width: "18rem" }}
+                            style={{width: "18rem"}}
                         >
                             <Card.Header>
                                 {sponsor.firstName + " " + sponsor.lastName}
                             </Card.Header>
                             <Card.Body>
                                 <Card.Title>
-                                    <Button
-                                        style={buttonStyle}
-                                        variant="secondary"
+                                    <Button onClick={this.props.editSponsor.bind(this, sponsor.id)}
+                                            style={buttonStyle}
+                                            variant="secondary"
                                     >
                                         Edit
                                     </Button>
@@ -48,18 +51,18 @@ export class Sponsors extends Component {
                                         Delete
                                     </Button>
                                 </Card.Title>
-                                <Card.Text>
-                                    <p>Email: {sponsor.email}</p>
-                                    <p>Phone No: {sponsor.phoneNo}</p>
-                                    <p>Address: {sponsor.address}</p>
-                                    <p>City:{sponsor.city}</p>
-                                    <p>State: {sponsor.state}</p>
-                                    <p>Country: {sponsor.country}</p>
-                                    <p>
-                                        Created At:
-                                        {sponsor.created_at}
-                                    </p>
-                                </Card.Text>
+                                    <Card.Text>
+                                        <p>Email: {sponsor.email}</p>
+                                        <p>Phone No: {sponsor.phoneNo}</p>
+                                        <p>Address: {sponsor.address}</p>
+                                        <p>City: {sponsor.city}</p>
+                                        <p>State: {sponsor.region}</p>
+                                        <p>Country: {sponsor.country}</p>
+                                        <p>
+                                            Created At:
+                                            {sponsor.created_at}
+                                        </p>
+                                    </Card.Text>
                             </Card.Body>
                         </Card>
                     ))}
@@ -73,6 +76,6 @@ const mapStateToProps = state => ({
     sponsors: state.sponsors.sponsors
 });
 
-export default connect(mapStateToProps, { getSponsors, deleteSponsor })(
+export default connect(mapStateToProps, {getSponsors, deleteSponsor, editSponsor})(
     Sponsors
 );

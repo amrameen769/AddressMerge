@@ -1,10 +1,10 @@
-import { GET_SPONSORS, DELETE_SPONSOR } from "../actions/types.js";
+import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR} from "../actions/types.js";
 
 const initialState = {
     sponsors: []
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
     switch (action.type) {
         case GET_SPONSORS:
             return {
@@ -17,6 +17,16 @@ export default function(state = initialState, action) {
                 sponsors: state.sponsors.filter(
                     sponsor => sponsor.id !== action.payload
                 )
+            };
+        case ADD_SPONSOR:
+            return {
+                ...state,
+                sponsors: [...state.sponsors, action.payload]
+            };
+        case EDIT_SPONSOR:
+            return {
+                ...state,
+                sponsors: [...state.sponsors, action.payload]
             };
 
         default:
