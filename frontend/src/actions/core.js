@@ -1,6 +1,6 @@
 import axios from "axios";
 import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR, GET_ERRORS} from "./types";
-import { createMessage } from './messagesAction';
+import {createMessage} from './messagesAction';
 
 // GET SPONSORS
 export const getSponsors = () => dispatch => {
@@ -12,7 +12,16 @@ export const getSponsors = () => dispatch => {
                 payload: res.data
             });
         })
-        .catch(err => console.log(err));
+        .catch(err => {
+            const errors = {
+                msg: err.response.data,
+                status: err.response.status
+            };
+            dispatch({
+                type: GET_ERRORS,
+                payload: errors
+            });
+        });
 };
 
 //DELETE SPONSOR

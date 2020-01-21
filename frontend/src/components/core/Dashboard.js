@@ -5,8 +5,8 @@ import AddSponsor from "./AddSponsor";
 export default function Dashboard() {
     return (
         <Fragment>
-            <Sponsors />
             <AddSponsor />
+            <Sponsors />
         </Fragment>
     );
 }

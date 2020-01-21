@@ -5,8 +5,15 @@ from .serializers import SponsorSerializer
 
 # Sponsor ViewSet
 class SponsorViewset(viewsets.ModelViewSet):
-    queryset = Sponsors.objects.all()
+    # queryset = Sponsors.objects.all()
     permission_classes = [
-        permissions.AllowAny
+        permissions.IsAuthenticated
     ]
+
     serializer_class = SponsorSerializer
+
+    def get_queryset(self):
+        return self.request.user.sponsors.all()
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
