@@ -25,7 +25,7 @@ SECRET_KEY = 'v096n367b3x@!g&q4gw6j157s=d&%-d62uwaqmh9^ut8lzsk$g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["addressme.netlify.com"]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -41,12 +41,12 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_countries',
     'frontend',
+    'knox',
+    'clients',
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.TokenAuthentication',
-    ]
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication', ),
 }
 
 MIDDLEWARE = [
