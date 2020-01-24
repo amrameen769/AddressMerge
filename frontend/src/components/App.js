@@ -7,15 +7,16 @@ import {Provider as AlertProvider} from 'react-alert';
 import AlertTemplate from "react-alert-template-basic";
 
 import Header from "./layout/Header";
-import Dashboard from "../components/core/Dashboard";
+import AddressBook from "./core/AddressBook";
 import Alerts from './layout/Alerts';
 import Login from "./clients/Login";
 import Register from "./clients/Register";
+import PrivateRoute from "./misc/PrivateRoute";
 
 
 import {Provider} from "react-redux";
 import store from "../store";
-
+import {loadClient} from "../actions/authentication";
 
 //Alert Options
 const alertOptions = {
@@ -28,6 +29,10 @@ class App extends Component {
         "font-family": "Roboto"
     };
 
+    componentDidMount() {
+        store.dispatch(loadClient());
+    }
+
     render() {
         return (
             <Provider store={store}>
@@ -38,7 +43,7 @@ class App extends Component {
                             <Alerts/>
                             <Container>
                                 <Switch>
-                                    <Route exact path="/" component={Dashboard}/>
+                                    <PrivateRoute exact path="/address-book" component={AddressBook}/>
                                     <Route exact path="/register" component={Register}/>
                                     <Route exact path="/login" component={Login}/>
                                 </Switch>

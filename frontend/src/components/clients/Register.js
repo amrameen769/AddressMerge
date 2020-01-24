@@ -21,9 +21,9 @@ export class Register extends Component {
 
         return (
             < div
-                className="col-lg-7">
+                className="col-md-6 m-auto">
                 < div
-                    className="p-5">
+                    className="card card-body mt-5">
                     < div
                         className="text-center">
                         < h4
@@ -33,16 +33,14 @@ export class Register extends Component {
                             ! </h4>
                     </div>
                     <form onSubmit={this.onSubmit}>
-                        <div className="form-group row">
-                            <div className="col-sm-6 mb-3 mb-sm-0">
-                                <input
-                                    className="form-control form-control-user" type="text"
-                                    placeholder="UserName"
-                                    name="username"
-                                    onChange={this.onChange}
-                                    value={username}
-                                />
-                            </div>
+                        <div className="form-group">
+                            <input
+                                className="form-control form-control-user" type="text"
+                                placeholder="UserName"
+                                name="username"
+                                onChange={this.onChange}
+                                value={username}
+                            />
                         </div>
                         <div className="form-group">
                             <input className="form-control form-control-user"
@@ -76,6 +74,12 @@ export class Register extends Component {
                         <button className="btn btn-primary btn-block text-white btn-user" type="submit">Register
                             Account
                         </button>
+                        <p className="text-center">
+                            Already Have an Account?
+                            <Link to="/login">
+                                Login
+                            </Link>
+                        </p>
                     </form>
                 </div>
             </div>
