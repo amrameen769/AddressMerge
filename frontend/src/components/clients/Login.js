@@ -1,20 +1,32 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {loginClient} from "../../actions/authentication";
 
-export class Register extends Component {
+export class Login extends Component {
     state = {
         username: '',
         password: '',
     };
 
+    static propTypes = {
+        loginClient: PropTypes.func.isRequired,
+        isAuthenticated: PropTypes.bool
+    };
+
     onSubmit = e => {
         e.preventDefault();
-        console.log("Submit");
+        this.props.loginClient(this.state.username, this.state.password);
     };
 
     onChange = e => this.setState({[e.target.name]: e.target.value});
 
     render() {
+
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/address-book"/>;
+        }
         const {username, email, password, confirm_password} = this.state;
 
         return (
@@ -64,4 +76,8 @@ export class Register extends Component {
     }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+    isAuthenticated: state.authentication.isAuthenticated
+});
+
+export default connect(mapStateToProps, {loginClient})(Login);

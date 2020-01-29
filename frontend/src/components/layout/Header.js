@@ -1,13 +1,45 @@
 import React, {Component} from 'react';
-import {Navbar, Nav, NavDropdown} from "react-bootstrap";
+import {Navbar, Nav, NavDropdown, Button} from "react-bootstrap";
 import BuildIcon from '@material-ui/icons/Build';
 import CreateIcon from '@material-ui/icons/Create';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import {Link} from "react-router-dom";
-import { Container } from "react-bootstrap";
+import {Container} from "react-bootstrap";
+import {connect} from "react-redux";
+import PropTypes from "prop-types";
+import {logoutClient} from "../../actions/authentication";
 
 class Header extends Component {
+
+    static propTypes = {
+        logoutClient: PropTypes.func.isRequired,
+        authentication: PropTypes.object.isRequired
+    };
+
     render() {
+        const {isAuthenticated, client} = this.props.authentication;
+
+        const authLinks = (
+            <Nav>
+                <li className="nav-item">
+                    <Button onClick={this.props.logoutClient} className='nav-link btn-info text-light'>
+                        Logout
+                    </Button>
+                </li>
+            </Nav>
+        );
+
+        const guestLinks = (
+            <Nav>
+                <li className="nav-item">
+                    <Link to="/register" className="nav-link">Register</Link>
+                </li>
+                <li className="nav-item">
+                    <Link to="/login" className="nav-link">Login</Link>
+                </li>
+            </Nav>
+        );
+
         return (
             <Navbar sticky="top" collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
@@ -30,14 +62,7 @@ class Header extends Component {
                             <Nav.Link eventKey={2} href="#memes">
                                 Profile Settings <BuildIcon/>
                             </Nav.Link>
-                        </Nav>
-                        <Nav>
-                            <li className="nav-item">
-                                <Link to="/register" className="nav-link">Register</Link>
-                            </li>
-                            <li className="nav-item">
-                                <Link to="/login" className="nav-link">Login</Link>
-                            </li>
+                            {isAuthenticated ? authLinks : guestLinks}
                         </Nav>
                     </Navbar.Collapse>
                 </Container>
@@ -46,4 +71,8 @@ class Header extends Component {
     }
 }
 
-export default Header;
+const mapStateToProps = state => ({
+    authentication: state.authentication
+});
+
+export default connect(mapStateToProps, {logoutClient})(Header);
