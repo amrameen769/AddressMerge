@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'frontend',
     'knox',
     'clients',
+    'homemerge',
 ]
 
 REST_FRAMEWORK = {

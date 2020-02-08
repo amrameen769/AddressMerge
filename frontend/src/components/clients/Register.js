@@ -1,5 +1,9 @@
 import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, Redirect} from 'react-router-dom';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {registerClient} from "../../actions/authentication";
+import {createMessage} from "../../actions/messagesAction";
 
 export class Register extends Component {
     state = {
@@ -9,14 +13,32 @@ export class Register extends Component {
         confirm_password: '',
     };
 
+    static propTypes = {
+        registerClient: PropTypes.func.isRequired,
+        isAuthenticated: PropTypes.bool
+    };
+
     onSubmit = e => {
         e.preventDefault();
-        console.log("Submit");
+        const {username, email, password, confirm_password} = this.state;
+        if(password !== confirm_password) {
+            this.props.createMessage({passwordDoNotMatch: "Passwords do not Match!"});
+        } else {
+            const newClient = {
+                username,
+                password,
+                email
+            };
+            this.props.registerClient(newClient);
+        }
     };
 
     onChange = e => this.setState({[e.target.name]: e.target.value});
 
     render() {
+        if (this.props.isAuthenticated) {
+            return <Redirect to="/"/>;
+        }
         const {username, email, password, confirm_password} = this.state;
 
         return (
@@ -87,4 +109,8 @@ export class Register extends Component {
     }
 }
 
-export default Register;
+const mapStateToProps = state => ({
+    isAuthenticated: state.authentication.isAuthenticated
+});
+
+export default connect(mapStateToProps, {registerClient, createMessage})(Register);

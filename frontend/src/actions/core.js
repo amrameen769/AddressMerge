@@ -1,11 +1,12 @@
 import axios from "axios";
-import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR,} from "./types";
+import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR} from "./types";
 import {createMessage, returnErrors } from './messagesAction';
+import {tokenConfig} from "./authentication";
 
 // GET SPONSORS
-export const getSponsors = () => dispatch => {
+export const getSponsors = () => (dispatch, getState) => {
     axios
-        .get("/api/sponsors/")
+        .get("/api/sponsors/", tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: GET_SPONSORS,
@@ -16,9 +17,9 @@ export const getSponsors = () => dispatch => {
 };
 
 //DELETE SPONSOR
-export const deleteSponsor = id => dispatch => {
+export const deleteSponsor = id => (dispatch, getState) => {
     axios
-        .delete(`/api/sponsors/${id}/`)
+        .delete(`/api/sponsors/${id}/`, tokenConfig(getState))
         .then(res => {
             dispatch(createMessage({sponsorDeleted: "Sponsor Deleted!"}));
             dispatch({
@@ -30,9 +31,9 @@ export const deleteSponsor = id => dispatch => {
 };
 
 //ADD SPONSOR
-export const addSponsor = (sponsor) => dispatch => {
+export const addSponsor = (sponsor) => (dispatch, getState) => {
     axios
-        .post("/api/sponsors/", sponsor)
+        .post("/api/sponsors/", sponsor, tokenConfig(getState))
         .then(res => {
             dispatch(createMessage({sponsorAdded: "Sponsor Added"}));
             dispatch({
