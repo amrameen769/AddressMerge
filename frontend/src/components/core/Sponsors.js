@@ -6,6 +6,7 @@ import {Button, Form} from "react-bootstrap";
 import {Table} from "react-bootstrap";
 
 export class Sponsors extends Component {
+
     static propTypes = {
         sponsors: PropTypes.array.isRequired,
         deleteSponsor: PropTypes.func.isRequired,
@@ -17,8 +18,13 @@ export class Sponsors extends Component {
         this.props.getSponsors();
     }
 
+    checkOwner(owner, client) {
+        return owner === client;
+    }
+
     render() {
         const buttonStyle = {width: "90px"};
+        const client = this.props.client;
         return (
             <Fragment>
                 <h1>Sponsors List</h1>
@@ -64,16 +70,15 @@ export class Sponsors extends Component {
                                 <Button onClick={this.props.editSponsor.bind(this, sponsor.id)}
                                         style={buttonStyle}
                                         variant="secondary"
+                                        disabled={this.checkOwner(sponsor.owner, client.id)}
                                 >
                                     Edit
                                 </Button>
                                 <Button
-                                    onClick={this.props.deleteSponsor.bind(
-                                        this,
-                                        sponsor.id
-                                    )}
+                                    onClick={this.props.deleteSponsor.bind(this, sponsor.id)}
                                     style={buttonStyle}
                                     variant="danger"
+                                    disabled={this.checkOwner(sponsor.owner, client.id)}
                                 >
                                     Delete
                                 </Button>
@@ -88,7 +93,8 @@ export class Sponsors extends Component {
 }
 
 const mapStateToProps = state => ({
-    sponsors: state.sponsors.sponsors
+    sponsors: state.sponsors.sponsors,
+    client: state.authentication.client
 });
 
 export default connect(mapStateToProps, {getSponsors, deleteSponsor, editSponsor})(

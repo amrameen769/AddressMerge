@@ -17,9 +17,8 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
-    # path('', include('homemerge.urls')),
     path('admin/', admin.site.urls),
-    path('merger/', include('frontend.urls')),
+    path('', include('frontend.urls')),
     path('', include('core.urls')),
     path('', include('clients.urls')),
     # path(r'^api-auth/', include('rest_framework.urls'))

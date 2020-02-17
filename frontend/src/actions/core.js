@@ -1,6 +1,6 @@
 import axios from "axios";
-import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR} from "./types";
-import {createMessage, returnErrors } from './messagesAction';
+import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR, GET_SPONSORGROUPS} from "./types";
+import {createMessage, returnErrors} from './messagesAction';
 import {tokenConfig} from "./authentication";
 
 // GET SPONSORS
@@ -45,14 +45,25 @@ export const addSponsor = (sponsor) => (dispatch, getState) => {
 };
 
 //EDIT SPONSOR
-export const editSponsor = id => dispatch => {
+export const editSponsor = id => (dispatch, getState) => {
     axios
-        .get(`/api/sponsors/${id}/`)
+        .get(`/api/sponsors/${id}/`, tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: EDIT_SPONSOR,
-                payload: id
+                payload: res.data
             });
         }).catch(err => console.log(err));
 
+};
+
+//GET SPONSORGROUP
+export const getSponsorGroup = () => (dispatch, getState) => {
+    axios.get('/api/sponsorgroups', tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: GET_SPONSORGROUPS,
+                payload: res.data
+            });
+        }).catch(err => console.log(err));
 };

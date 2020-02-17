@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import {CountryDropdown, RegionDropdown, CountryRegionData} from 'react-country-region-selector';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-import {addSponsor} from "../../actions/core";
+import {addSponsor, getSponsorGroup} from "../../actions/core";
 
 export class AddSponsor extends Component {
     state = {
@@ -16,11 +16,13 @@ export class AddSponsor extends Component {
         "country": "",
         "region": "",
         "city": "",
-        "zip": ""
+        "zip": "",
+        "sponsorgroup": "",
     };
 
     static propTypes = {
-        addSponsor: PropTypes.func.isRequired
+        addSponsor: PropTypes.func.isRequired,
+        getSponsorGroup: PropTypes.func.isRequired
     };
 
     selectCountry(val) {
@@ -36,8 +38,8 @@ export class AddSponsor extends Component {
     onSubmit = e => {
         e.preventDefault();
         // console.log("Submitted");
-        const {firstName, lastName, email, phoneNo, address, country, region, city, zip} = this.state;
-        const sponsor = {firstName, lastName, email, phoneNo, address, country, region, city, zip};
+        const {firstName, lastName, email, phoneNo, address, country, region, city, zip, sponsorgroup} = this.state;
+        const sponsor = {firstName, lastName, email, phoneNo, address, country, region, city, zip, sponsorgroup};
         this.props.addSponsor(sponsor);
         this.setState({
             "firstName": "",
@@ -48,12 +50,17 @@ export class AddSponsor extends Component {
             "country": "",
             "region": "",
             "city": "",
-            "zip": ""
+            "zip": "",
+            "sponsorgroup": "",
         })
     };
 
+    componentDidMount() {
+        this.props.getSponsorGroup();
+    }
+
     render() {
-        const {firstName, lastName, email, phoneNo, address, country, region, city, zip} = this.state;
+        const {firstName, lastName, email, phoneNo, address, country, region, city, zip, sponsorgroup} = this.state;
         return (
             <div>
                 <h1>Add Sponsors</h1>
@@ -118,6 +125,21 @@ export class AddSponsor extends Component {
                             <Form.Control name="zip" onChange={this.onChange} value={zip}/>
                         </Form.Group>
                     </Form.Row>
+                    <Form.Row>
+                        <Form.Group as={Col} controlId="formGridState">
+                            <Form.Label>Sponsor Group</Form.Label>
+                            <Form.Control as="select"
+                                          name="sponsorgroup"
+                                          value={sponsorgroup}
+                                          onChange={this.onChange}
+                            >
+                                <option selected/>
+                                {this.props.sponsorgroups.map(sponsorgroup => (
+                                    <option value={sponsorgroup.id}>{sponsorgroup.groupName}</option>
+                                ))}
+                            </Form.Control>
+                        </Form.Group>
+                    </Form.Row>
 
                     <Button variant="primary" type="submit">
                         Submit
@@ -128,5 +150,9 @@ export class AddSponsor extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    sponsorgroups: state.sponsors.sponsorgroups
+});
 
-export default connect(null, {addSponsor})(AddSponsor);
+
+export default connect(mapStateToProps, {addSponsor, getSponsorGroup})(AddSponsor);
