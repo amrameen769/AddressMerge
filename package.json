@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "description": "Word Processing and Business Information Management",
   "main": "index.js",
+  "engines": {
+    "node": "12.10.0",
+    "npm": "6.10.3"
+  },
   "scripts": {
     "dev": "webpack --mode development --watch ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
-    "build": "webpack --mode production ./frontend/src/index.js --output ./frontend/static/frontend/main.js"
+    "build": "webpack --mode production ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
+    "postinstall": "npm run dev"
   },
   "repository": {
     "type": "git",
@@ -63,9 +68,5 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "sass": "^1.24.4"
-  },
-  "engines": {
-    "node": "12.10.0",
-    "npm": "6.10.3"
   }
 }
