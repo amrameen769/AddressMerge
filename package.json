@@ -63,5 +63,9 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "sass": "^1.24.4"
+  },
+  "engines": {
+    "node": "12.10.0",
+    "npm": "6.10.3"
   }
 }
