@@ -10,7 +10,7 @@
   "scripts": {
     "dev": "webpack --mode development --watch ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
     "build": "webpack --mode production ./frontend/src/index.js --output ./frontend/static/frontend/main.js",
-    "postinstall": "npm run dev"
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",
