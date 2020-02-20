@@ -1,5 +1,5 @@
 import axios from "axios";
-import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR, GET_SPONSORGROUPS} from "./types";
+import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR, GET_SPONSORGROUPS, GET_SPONSORGROUP} from "./types";
 import {createMessage, returnErrors} from './messagesAction';
 import {tokenConfig} from "./authentication";
 
@@ -57,12 +57,23 @@ export const editSponsor = id => (dispatch, getState) => {
 
 };
 
-//GET SPONSORGROUP
-export const getSponsorGroup = () => (dispatch, getState) => {
+//GET SPONSORGROUPS
+export const getSponsorGroups = () => (dispatch, getState) => {
     axios.get('/api/sponsorgroups', tokenConfig(getState))
         .then(res => {
             dispatch({
                 type: GET_SPONSORGROUPS,
+                payload: res.data
+            });
+        }).catch(err => console.log(err));
+};
+
+//GET SPONSORGROUP
+export const getSponsorGroup = (id) => (dispatch, getState) => {
+    axios.get(`/api/sponsorgroups/${id}/`, tokenConfig(getState))
+        .then(res => {
+            dispatch({
+                type: GET_SPONSORGROUP,
                 payload: res.data
             });
         }).catch(err => console.log(err));

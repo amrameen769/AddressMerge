@@ -4,7 +4,7 @@ import Col from "react-bootstrap/Col";
 import {CountryDropdown, RegionDropdown, CountryRegionData} from 'react-country-region-selector';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-import {addSponsor, getSponsorGroup} from "../../actions/core";
+import {addSponsor, getSponsorGroups} from "../../actions/core";
 
 export class AddSponsor extends Component {
     state = {
@@ -22,7 +22,7 @@ export class AddSponsor extends Component {
 
     static propTypes = {
         addSponsor: PropTypes.func.isRequired,
-        getSponsorGroup: PropTypes.func.isRequired
+        getSponsorGroups: PropTypes.func.isRequired
     };
 
     selectCountry(val) {
@@ -56,7 +56,7 @@ export class AddSponsor extends Component {
     };
 
     componentDidMount() {
-        this.props.getSponsorGroup();
+        this.props.getSponsorGroups();
     }
 
     render() {
@@ -130,12 +130,11 @@ export class AddSponsor extends Component {
                             <Form.Label>Sponsor Group</Form.Label>
                             <Form.Control as="select"
                                           name="sponsorgroup"
-                                          value={sponsorgroup}
                                           onChange={this.onChange}
+                                          defaultValue={0}
                             >
-                                <option selected/>
                                 {this.props.sponsorgroups.map(sponsorgroup => (
-                                    <option value={sponsorgroup.id}>{sponsorgroup.groupName}</option>
+                                    <option key={sponsorgroup.id} value={sponsorgroup.id}>{sponsorgroup.groupName}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>
@@ -155,4 +154,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {addSponsor, getSponsorGroup})(AddSponsor);
+export default connect(mapStateToProps, {addSponsor, getSponsorGroups})(AddSponsor);

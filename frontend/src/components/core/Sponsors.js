@@ -11,7 +11,7 @@ export class Sponsors extends Component {
         sponsors: PropTypes.array.isRequired,
         deleteSponsor: PropTypes.func.isRequired,
         getSponsors: PropTypes.func.isRequired,
-        editSponsor: PropTypes.func.isRequired
+        editSponsor: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
@@ -19,7 +19,7 @@ export class Sponsors extends Component {
     }
 
     checkOwner(owner, client) {
-        return owner === client;
+        return owner !== client;
     }
 
     render() {
@@ -41,6 +41,7 @@ export class Sponsors extends Component {
                         <th>Country</th>
                         <th>Zip Code</th>
                         <th>Created At</th>
+                        <th>Group Name</th>
                         <th>Status</th>
                         <th>Edit/Delete</th>
                     </tr>
@@ -58,6 +59,7 @@ export class Sponsors extends Component {
                             <td>{sponsor.country}</td>
                             <td>{sponsor.zip}</td>
                             <td>{sponsor.created_at}</td>
+                            <td>{sponsor.sponsorgroupname}</td>
                             <td>
                                 <Form.Check
                                     disabled

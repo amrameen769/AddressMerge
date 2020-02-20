@@ -1,8 +1,6 @@
 import React, {Component, Fragment} from "react";
-import {HashRouter as Router, Route, Switch} from 'react-router-dom';
 import ReactDOM from "react-dom";
-import {Merger} from "./core/Merger";
-import {HomeMe} from "./layout/HomeMe";
+import Merger from "./core/Merger";
 
 class App extends Component {
     styles = {

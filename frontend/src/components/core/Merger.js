@@ -12,6 +12,8 @@ import {loadClient} from "../../actions/authentication";
 import {Provider as AlertProvider} from "react-alert";
 import AlertTemplate from "react-alert-template-basic";
 import {Provider} from "react-redux";
+import {HomeMe} from "../layout/HomeMe";
+import ManageSponsor from "../layout/ManageSponsor";
 
 //Alert Options
 const alertOptions = {
@@ -35,11 +37,11 @@ export class Merger extends Component {
                             <Alerts/>
                             <Container>
                                 <Switch>
-                                    <PrivateRoute
+                                    <Route
                                         exact
-                                        path="/address-book"
-                                        component={AddressBook}
-                                    />
+                                        path="/"
+                                        component={HomeMe}
+                                        />
                                     <Route
                                         exact
                                         path="/register"
@@ -49,6 +51,16 @@ export class Merger extends Component {
                                         exact
                                         path="/login"
                                         component={Login}
+                                    />
+                                    <PrivateRoute
+                                        exact
+                                        path="/address-book"
+                                        component={AddressBook}
+                                    />
+                                    <PrivateRoute
+                                        exact
+                                        path="/manage-sponsors"
+                                        component={ManageSponsor}
                                     />
                                 </Switch>
                             </Container>

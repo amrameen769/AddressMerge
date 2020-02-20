@@ -21,10 +21,10 @@ class Sponsors(models.Model):
     region = models.CharField(max_length=100, blank=True)
     city = models.CharField(max_length=100, blank=True)
     zip = models.CharField(max_length=10, blank=True)
-    owner = models.ForeignKey(User, related_name="sponsors", on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, related_name="ownername", on_delete=models.CASCADE, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
-    sponsorgroup = models.ForeignKey(SponsorGroup, on_delete=models.CASCADE, null=True)
+    sponsorgroup = models.ForeignKey(SponsorGroup, related_name="sponsorgroupname", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.firstName

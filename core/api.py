@@ -8,7 +8,7 @@ from .serializers import SponsorSerializer, SponsorGroupSerializer
 class SponsorViewset(viewsets.ModelViewSet):
     queryset = Sponsors.objects.all()
     permission_classes = [
-        permissions.IsAuthenticated
+        permissions.AllowAny
     ]
 
     serializer_class = SponsorSerializer
