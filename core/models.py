@@ -51,7 +51,8 @@ class Donations(models.Model):
 
 
 class Candidates(models.Model):
-    candidateName = models.CharField(max_length=100)
+    candidateFirstName = models.CharField(max_length=100, default=True)
+    candidateLastName = models.CharField(max_length=100)
     candidateCategory = models.ForeignKey(CandidateCategory, related_name="candidates", on_delete=models.CASCADE,
                                           null=True)
     sponsorId = models.ForeignKey(Sponsors, related_name="candidates", on_delete=models.CASCADE, null=True)

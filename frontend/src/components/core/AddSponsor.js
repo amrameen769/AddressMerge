@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Form, Button, FormControl} from 'react-bootstrap';
+import {Form, Button, FormControl, Container} from 'react-bootstrap';
 import Col from "react-bootstrap/Col";
 import {CountryDropdown, RegionDropdown, CountryRegionData} from 'react-country-region-selector';
 import {connect} from "react-redux";
@@ -62,7 +62,7 @@ export class AddSponsor extends Component {
     render() {
         const {firstName, lastName, email, phoneNo, address, country, region, city, zip, sponsorgroup} = this.state;
         return (
-            <div>
+            <Container>
                 <h1>Add Sponsors</h1>
                 <Form onSubmit={this.onSubmit}>
                     <Form.Row>
@@ -144,7 +144,7 @@ export class AddSponsor extends Component {
                         Submit
                     </Button>
                 </Form>
-            </div>
+            </Container>
         );
     }
 }
