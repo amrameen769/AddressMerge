@@ -7,18 +7,21 @@ import PropTypes from 'prop-types';
 import {addSponsor, getSponsorGroups} from "../../actions/core";
 
 export class AddSponsor extends Component {
-    state = {
-        "firstName": "",
-        "lastName": "",
-        "email": "",
-        "phoneNo": "",
-        "address": "",
-        "country": "",
-        "region": "",
-        "city": "",
-        "zip": "",
-        "sponsorgroup": "",
-    };
+    constructor(props) {
+        super(props);
+        this.state = {
+            "firstName": "",
+            "lastName": "",
+            "email": "",
+            "phoneNo": "",
+            "address": "",
+            "country": "",
+            "region": "",
+            "city": "",
+            "zip": "",
+            "sponsorgroup": ""
+        };
+    }
 
     static propTypes = {
         addSponsor: PropTypes.func.isRequired,
@@ -60,7 +63,7 @@ export class AddSponsor extends Component {
     }
 
     render() {
-        const {firstName, lastName, email, phoneNo, address, country, region, city, zip, sponsorgroup} = this.state;
+        const {firstName, lastName, email, phoneNo, address, country, region, city, zip, sponsorgroup, theme} = this.state;
         return (
             <Container>
                 <h1>Add Sponsors</h1>
@@ -134,7 +137,8 @@ export class AddSponsor extends Component {
                                           defaultValue={0}
                             >
                                 {this.props.sponsorgroups.map(sponsorgroup => (
-                                    <option key={sponsorgroup.id} value={sponsorgroup.id}>{sponsorgroup.groupName}</option>
+                                    <option key={sponsorgroup.id}
+                                            value={sponsorgroup.id}>{sponsorgroup.groupName}</option>
                                 ))}
                             </Form.Control>
                         </Form.Group>
