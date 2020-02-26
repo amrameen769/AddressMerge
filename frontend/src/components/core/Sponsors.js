@@ -1,17 +1,21 @@
 import React, {Component, Fragment} from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import {getSponsors, deleteSponsor, editSponsor} from "../../actions/core";
+import {getSponsors, deleteSponsor} from "../../actions/core";
 import {Button, Form} from "react-bootstrap";
 import {Table} from "react-bootstrap";
+import {Link} from "react-router-dom";
 
 export class Sponsors extends Component {
+
+    constructor(props) {
+        super(props);
+    }
 
     static propTypes = {
         sponsors: PropTypes.array.isRequired,
         deleteSponsor: PropTypes.func.isRequired,
         getSponsors: PropTypes.func.isRequired,
-        editSponsor: PropTypes.func.isRequired,
     };
 
     componentDidMount() {
@@ -69,13 +73,18 @@ export class Sponsors extends Component {
                                 />
                             </td>
                             <td>
-                                <Button onClick={this.props.editSponsor.bind(this, sponsor.id)}
+                                <Link to={{
+                                    pathname: `/edit-sponsor/${sponsor.id}`,
+                                    state: {fromDashboard: false}
+                                }}>
+                                    <Button
                                         style={buttonStyle}
                                         variant="secondary"
                                         disabled={this.checkOwner(sponsor.owner, client.id)}
-                                >
-                                    Edit
-                                </Button>
+                                    >
+                                        Edit
+                                    </Button>
+                                </Link>
                                 <Button
                                     onClick={this.props.deleteSponsor.bind(this, sponsor.id)}
                                     style={buttonStyle}
@@ -99,6 +108,6 @@ const mapStateToProps = state => ({
     client: state.authentication.client
 });
 
-export default connect(mapStateToProps, {getSponsors, deleteSponsor, editSponsor})(
+export default connect(mapStateToProps, {getSponsors, deleteSponsor})(
     Sponsors
 );

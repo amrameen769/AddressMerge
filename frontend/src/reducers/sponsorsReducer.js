@@ -5,6 +5,7 @@ import {act} from "react-dom/test-utils";
 const initialState = {
     sponsors: [],
     sponsorgroups: [],
+    sponsor:[],
 };
 
 export default function (state = initialState, action) {
@@ -29,7 +30,7 @@ export default function (state = initialState, action) {
         case EDIT_SPONSOR:
             return {
                 ...state,
-                sponsors: action.payload
+                sponsor: action.payload
             };
         case GET_SPONSORGROUPS:
             return {
