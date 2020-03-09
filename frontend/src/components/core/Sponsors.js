@@ -5,6 +5,7 @@ import {getSponsors, deleteSponsor} from "../../actions/core";
 import {Button, Form} from "react-bootstrap";
 import {Table} from "react-bootstrap";
 import {Link} from "react-router-dom";
+import ActionAlert from "../layout/ActionAlert";
 
 export class Sponsors extends Component {
 
@@ -85,14 +86,19 @@ export class Sponsors extends Component {
                                         Edit
                                     </Button>
                                 </Link>
-                                <Button
-                                    onClick={this.props.deleteSponsor.bind(this, sponsor.id)}
+                                <ActionAlert
+                                    action={"Delete"}
+                                    title={"Confirm Delete"}
+                                    id={sponsor.id}
+                                    content={"Delete this Sponsor?"}
+                                    initaction={this.props.deleteSponsor}
                                     style={buttonStyle}
-                                    variant="danger"
+                                    variant={"outlined"}
+                                    color={"secondary"}
                                     disabled={this.checkOwner(sponsor.owner, client.id)}
                                 >
                                     Delete
-                                </Button>
+                                </ActionAlert>
                             </td>
                         </tr>
                     ))}

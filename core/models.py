@@ -42,6 +42,9 @@ class Documents(models.Model):
 class CandidateCategory(models.Model):
     categoryName = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.categoryName
+
 
 class Donations(models.Model):
     donationName = models.CharField(max_length=50)
@@ -51,9 +54,23 @@ class Donations(models.Model):
 
 
 class Candidates(models.Model):
-    candidateFirstName = models.CharField(max_length=100, default=True)
-    candidateLastName = models.CharField(max_length=100)
-    candidateCategory = models.ForeignKey(CandidateCategory, related_name="candidates", on_delete=models.CASCADE,
-                                          null=True)
-    sponsorId = models.ForeignKey(Sponsors, related_name="candidates", on_delete=models.CASCADE, null=True)
-    donationId = models.ForeignKey(Donations, related_name="candidates", on_delete=models.CASCADE, null=True)
+    candidateFirstName = models.CharField(max_length=100, null=True)
+    candidateLastName = models.CharField(max_length=100, null=True)
+    candidateCategory = models.ForeignKey(CandidateCategory, related_name="candidatecategoryname",
+                                          on_delete=models.CASCADE, null=True)
+    email = models.EmailField(max_length=100, unique=True)
+    phoneNo = models.BigIntegerField()
+    address = models.TextField(blank=True)
+    country = models.CharField(max_length=100, blank=True)
+    region = models.CharField(max_length=100, blank=True)
+    city = models.CharField(max_length=100, blank=True)
+    zip = models.CharField(max_length=10, blank=True)
+    sponsorId = models.ForeignKey(Sponsors, related_name="sponsoridname", on_delete=models.CASCADE, null=True)
+    donationId = models.ForeignKey(Donations, related_name="donationidname", on_delete=models.CASCADE, null=True,
+                                   blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    status = models.BooleanField(default=True)
+    owner = models.ForeignKey(User, related_name="candidateownername", on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.candidateFirstName

@@ -1,51 +1,31 @@
 import React, {Component} from 'react';
-import {editSponsor} from "../../actions/core";
+import {getSponsor} from "../../actions/core";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
 import {Button, Form} from "react-bootstrap";
+import UpdateSponsor from "./UpdateSponsor";
 
-class EditSponsor extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            sponsor_id: null,
-            sponsor: []
-        };
-    }
-
-    static propTypes = {
-        editSponsor: PropTypes.func.isRequired
-    };
-
-    componentDidMount() {
-        if (this.props.match) {
-            const {id} = this.props.match.params;
-            this.setState({
-                sponsor_id: id
-            });
-            this.props.editSponsor(id);
-        }
-    }
-
-    onChange = e => this.setState({[e.target.name]: e.target.value});
-
-    render() {
-        const {sponsor} = this.props;
-        return (
+export function EditSponsor(props) {
+    let {sponsor, client} = props;
+    return (
+        client.id === sponsor.owner ? (
             <div>
-                <h1>Edit Sponsor {sponsor.firstName}</h1>
-                <Form>
+            <h1>Edit Sponsor {sponsor.firstName}</h1>
+            <UpdateSponsor sponsor={sponsor}/>
+        </div>
+        ) : (
+            <p>You can't Edit this Sponsor</p>
+        )
 
-                </Form>
-            </div>
-        );
-    }
+    );
 }
 
-const mapStateToProps = state => ({
-    sponsor: state.sponsors.sponsor,
-    client: state.authentication.client,
-    sponsorgroups: state.sponsors.sponsorgroups
-});
+const mapStateToProps = (state, ownProps) => {
+    const id = ownProps.match.params.id;
+    return {
+        client: state.authentication.client,
+        sponsor: state.sponsors.sponsors.find(sponsor => sponsor.id == id)
+    }
+};
 
-export default connect(mapStateToProps, {editSponsor})(EditSponsor);
+export default connect(mapStateToProps)(EditSponsor);

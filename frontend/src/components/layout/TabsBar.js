@@ -1,7 +1,8 @@
 import React, {useState} from "react";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import ManageSponsor from "./ManageSponsor";
+import ManageSponsor from "../core/ManageSponsor";
+import ManageCandidate from "../core/ManageCandidate"
 
 export default function ControlledTabs() {
   const [key, setKey] = useState(null);
@@ -12,7 +13,7 @@ export default function ControlledTabs() {
         <ManageSponsor />
       </Tab>
       <Tab eventKey="manage-candidates" title="Manage Candidates">
-        <h1>White</h1>
+        <ManageCandidate/>
       </Tab>
       <Tab eventKey="manage-funds" title="Manage Funds">
         <h1>Dark</h1>

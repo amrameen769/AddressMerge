@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Sponsors, SponsorGroup
+from .models import Sponsors, SponsorGroup, Documents, Donations, CandidateCategory, Candidates
 
 
 # Register your models here.
@@ -7,3 +7,7 @@ from .models import Sponsors, SponsorGroup
 
 admin.site.register(Sponsors)
 admin.site.register(SponsorGroup)
+admin.site.register(Donations)
+admin.site.register(Candidates)
+admin.site.register(CandidateCategory)
+admin.site.register(Documents)

@@ -2,7 +2,7 @@ import React, {Component, Fragment, useState} from 'react';
 import {Button, Nav} from "react-bootstrap";
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
-import ManageSponsor from "./ManageSponsor";
+import ManageSponsor from "../core/ManageSponsor";
 
 export class Toolbar extends Component {
     render() {

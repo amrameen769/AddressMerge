@@ -1,5 +1,12 @@
 import axios from "axios";
-import {GET_SPONSORS, DELETE_SPONSOR, EDIT_SPONSOR, ADD_SPONSOR, GET_SPONSORGROUPS, GET_SPONSORGROUP} from "./types";
+import {
+    GET_SPONSORS,
+    DELETE_SPONSOR,
+    GET_SPONSOR,
+    ADD_SPONSOR,
+    GET_SPONSORGROUPS,
+    GET_SPONSORGROUP
+} from "./types";
 import {createMessage, returnErrors} from './messagesAction';
 import {tokenConfig} from "./authentication";
 
@@ -44,17 +51,39 @@ export const addSponsor = (sponsor) => (dispatch, getState) => {
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
-//EDIT SPONSOR
-export const editSponsor = id => (dispatch, getState) => {
+//GET SPONSOR
+export const getSponsor = id => (dispatch, getState) => {
     axios
         .get(`/api/sponsors/${id}/`, tokenConfig(getState))
         .then(res => {
             dispatch({
-                type: EDIT_SPONSOR,
+                type: GET_SPONSOR,
                 payload: res.data
             });
         }).catch(err => console.log(err));
 
+};
+
+//UPDATE SPONSOR
+// export const updateSponsor = (sponsor) => (dispatch, getState) => {
+//     axios.put(`/api/sponsors/${sponsor.id}/`, sponsor, tokenConfig(getState))
+//     .then(res => {
+//             dispatch(createMessage({sponsorUpdated: "Sponsor Updated"}));
+//             dispatch({
+//                 type: UPDATE_SPONSOR,
+//                 payload: res.data
+//             });
+//         })
+//         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+// };
+
+export const updateSponsor = (sponsor) => (dispatch, getState) => {
+    axios.put(`/api/sponsors/${sponsor.id}/`, sponsor, tokenConfig(getState))
+    .then(res => {
+            dispatch(createMessage({sponsorUpdated: "Sponsor Updated"}));
+            getSponsors();
+        })
+        .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
 
 //GET SPONSORGROUPS

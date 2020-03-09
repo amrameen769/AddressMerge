@@ -13,6 +13,7 @@ import AlertTemplate from "react-alert-template-basic";
 import {Provider} from "react-redux";
 import {HomeMe} from "../layout/HomeMe";
 import EditSponsor from "./EditSponsor";
+import EditCandidate from "./EditCandidate";
 
 //Alert Options
 const alertOptions = {
@@ -64,6 +65,11 @@ export class Merger extends Component {
                                         exact
                                         path="/edit-sponsor/:id"
                                         component={EditSponsor}
+                                    />
+                                    <PrivateRoute
+                                        exact
+                                        path="/edit-candidate/:id"
+                                        component={EditCandidate}
                                     />
                                     {/*<PrivateRoute*/}
                                     {/*    exact*/}

@@ -19,7 +19,7 @@ export class AddSponsor extends Component {
             "region": "",
             "city": "",
             "zip": "",
-            "sponsorgroup": ""
+            "sponsorgroup": 1
         };
     }
 
@@ -40,10 +40,10 @@ export class AddSponsor extends Component {
 
     onSubmit = e => {
         e.preventDefault();
-        // console.log("Submitted");
         const {firstName, lastName, email, phoneNo, address, country, region, city, zip, sponsorgroup} = this.state;
         const sponsor = {firstName, lastName, email, phoneNo, address, country, region, city, zip, sponsorgroup};
         this.props.addSponsor(sponsor);
+        // console.log(sponsor);
         this.setState({
             "firstName": "",
             "lastName": "",
@@ -54,7 +54,7 @@ export class AddSponsor extends Component {
             "region": "",
             "city": "",
             "zip": "",
-            "sponsorgroup": "",
+            "sponsorgroup": sponsorgroup,
         })
     };
 

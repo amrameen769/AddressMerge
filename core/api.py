@@ -1,7 +1,7 @@
 from rest_framework import viewsets, permissions
 
-from .models import Sponsors, SponsorGroup
-from .serializers import SponsorSerializer, SponsorGroupSerializer
+from .models import Sponsors, SponsorGroup, Candidates, CandidateCategory
+from .serializers import SponsorSerializer, SponsorGroupSerializer, CandidateSerializer, CandidateCategorySerializer
 
 
 # Sponsor ViewSet
@@ -24,3 +24,18 @@ class SponsorGroupViewset(viewsets.ModelViewSet):
     queryset = SponsorGroup.objects.all()
 
     serializer_class = SponsorGroupSerializer
+
+
+class CandidateViewset(viewsets.ModelViewSet):
+    queryset = Candidates.objects.all()
+
+    serializer_class = CandidateSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+
+
+class CandidateCategoryViewset(viewsets.ModelViewSet):
+    queryset = CandidateCategory.objects.all()
+
+    serializer_class = CandidateCategorySerializer

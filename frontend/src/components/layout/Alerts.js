@@ -23,8 +23,12 @@ export class Alerts extends Component {
 
         if(message !== prevProps.message){
             if(message.sponsorDeleted) alert.success(message.sponsorDeleted);
+            if(message.candidateDeleted) alert.success(message.candidateDeleted);
             if(message.sponsorAdded) alert.success(message.sponsorAdded);
+            if(message.sponsorUpdated) alert.success(message.sponsorUpdated);
             if(message.passwordDoNotMatch) alert.error(message.passwordDoNotMatch);
+            if(message.candidateAdded) alert.success(message.candidateAdded);
+            if(message.candidateUpdated) alert.success(message.candidateUpdated);
         }
     }
 
