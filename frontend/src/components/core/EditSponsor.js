@@ -1,8 +1,5 @@
-import React, {Component} from 'react';
-import {getSponsor} from "../../actions/core";
+import React from 'react';
 import {connect} from "react-redux";
-import PropTypes from "prop-types";
-import {Button, Form} from "react-bootstrap";
 import UpdateSponsor from "./UpdateSponsor";
 
 export function EditSponsor(props) {
