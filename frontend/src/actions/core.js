@@ -64,7 +64,7 @@ export const getSponsor = id => (dispatch, getState) => {
 
 };
 
-//UPDATE SPONSOR
+
 // export const updateSponsor = (sponsor) => (dispatch, getState) => {
 //     axios.put(`/api/sponsors/${sponsor.id}/`, sponsor, tokenConfig(getState))
 //     .then(res => {
@@ -77,6 +77,7 @@ export const getSponsor = id => (dispatch, getState) => {
 //         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 // };
 
+//UPDATE SPONSOR
 export const updateSponsor = (sponsor) => (dispatch, getState) => {
     axios.put(`/api/sponsors/${sponsor.id}/`, sponsor, tokenConfig(getState))
     .then(res => {

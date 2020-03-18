@@ -5,6 +5,7 @@ import {CountryDropdown, RegionDropdown, CountryRegionData} from 'react-country-
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {getCandidateCategory, addCandidate} from "../../actions/candidates";
+import AddCategory from "./AddCategory";
 
 class AddCandidate extends Component {
     constructor(props) {
@@ -150,6 +151,7 @@ class AddCandidate extends Component {
                                             value={category.id}>{category.categoryName}</option>
                                 ))}
                             </Form.Control>
+                            <AddCategory/>
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridStateSponsor">
                             <Form.Label>Sponsor</Form.Label>
