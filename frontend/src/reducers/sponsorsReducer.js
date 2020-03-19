@@ -1,5 +1,6 @@
-import {GET_SPONSORS, DELETE_SPONSOR, GET_SPONSOR, ADD_SPONSOR} from "../actions/types";
+import {GET_SPONSORS, DELETE_SPONSOR, GET_SPONSOR, ADD_SPONSOR, ADD_SPONSORGROUP} from "../actions/types";
 import {GET_SPONSORGROUP, GET_SPONSORGROUPS} from "../actions/types";
+import {act} from "react-dom/test-utils";
 
 const initialState = {
     sponsors: [],
@@ -30,6 +31,12 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 sponsor: action.payload
+            };
+
+        case ADD_SPONSORGROUP:
+            return {
+                ...state,
+                sponsorgroups: [...state.sponsorgroups, action.payload]
             };
         case GET_SPONSORGROUPS:
             return {

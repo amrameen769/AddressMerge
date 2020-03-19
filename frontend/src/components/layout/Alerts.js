@@ -30,6 +30,8 @@ export class Alerts extends Component {
             if(message.passwordDoNotMatch) alert.error(message.passwordDoNotMatch);
             if(message.candidateAdded) alert.success(message.candidateAdded);
             if(message.candidateUpdated) alert.success(message.candidateUpdated);
+            if(message.candidateCategoryUpdated) alert.success(message.candidateCategoryUpdated);
+            if(message.sponsorgroupUpdated) alert.success(message.sponsorgroupUpdated);
         }
     }
 

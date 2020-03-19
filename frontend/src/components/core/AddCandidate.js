@@ -6,6 +6,7 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {getCandidateCategory, addCandidate} from "../../actions/candidates";
 import AddCategory from "./AddCategory";
+import {addCandidateCategory} from "../../actions/core";
 
 class AddCandidate extends Component {
     constructor(props) {
@@ -42,7 +43,19 @@ class AddCandidate extends Component {
         e.preventDefault();
         // console.log("Submitted");
         const {candidateFirstName, candidateLastName, email, phoneNo, address, country, region, city, zip, candidateCategory, sponsorId} = this.state;
-        const candidate = {candidateFirstName, candidateLastName, email, phoneNo, address, country, region, city, zip, candidateCategory, sponsorId};
+        const candidate = {
+            candidateFirstName,
+            candidateLastName,
+            email,
+            phoneNo,
+            address,
+            country,
+            region,
+            city,
+            zip,
+            candidateCategory,
+            sponsorId
+        };
         this.props.addCandidate(candidate);
         // console.log(candidate);
         this.setState({
@@ -151,7 +164,11 @@ class AddCandidate extends Component {
                                             value={category.id}>{category.categoryName}</option>
                                 ))}
                             </Form.Control>
-                            <AddCategory/>
+                            <AddCategory
+                                name={"candidateCategory"}
+                                action={"Add Candidate Group"}
+                                method={this.props.addCandidateCategory}
+                            />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridStateSponsor">
                             <Form.Label>Sponsor</Form.Label>
@@ -182,4 +199,4 @@ const mapStateToProps = state => ({
     sponsors: state.sponsors.sponsors
 });
 
-export default connect(mapStateToProps, {getCandidateCategory, addCandidate}) (AddCandidate);
+export default connect(mapStateToProps, {getCandidateCategory, addCandidate, addCandidateCategory})(AddCandidate);

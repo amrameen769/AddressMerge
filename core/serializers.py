@@ -1,6 +1,5 @@
 from rest_framework import serializers
 from core.models import Sponsors, SponsorGroup, Candidates, CandidateCategory
-from django import forms
 
 
 # Sponsor Serializer
@@ -33,3 +32,4 @@ class CandidateCategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = CandidateCategory
         fields = '__all__'
+

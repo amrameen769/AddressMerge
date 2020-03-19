@@ -5,7 +5,7 @@ import {
     GET_SPONSOR,
     ADD_SPONSOR,
     GET_SPONSORGROUPS,
-    GET_SPONSORGROUP
+    GET_SPONSORGROUP, ADD_SPONSORGROUP, ADD_CANDIDATECATEGORY
 } from "./types";
 import {createMessage, returnErrors} from './messagesAction';
 import {tokenConfig} from "./authentication";
@@ -80,7 +80,7 @@ export const getSponsor = id => (dispatch, getState) => {
 //UPDATE SPONSOR
 export const updateSponsor = (sponsor) => (dispatch, getState) => {
     axios.put(`/api/sponsors/${sponsor.id}/`, sponsor, tokenConfig(getState))
-    .then(res => {
+        .then(res => {
             dispatch(createMessage({sponsorUpdated: "Sponsor Updated"}));
             getSponsors();
         })
@@ -107,4 +107,28 @@ export const getSponsorGroup = (id) => (dispatch, getState) => {
                 payload: res.data
             });
         }).catch(err => console.log(err));
+};
+
+//ADD SPONSORGROUP
+export const addSponsorGroup = (sponsorgroup) => (dispatch, getState) => {
+    axios.post('/api/sponsorgroups/', sponsorgroup, tokenConfig(getState))
+        .then(res => {
+            dispatch(createMessage({sponsorgroupUpdated: "Sponsor Groups Updated"}));
+            dispatch({
+                type: ADD_SPONSORGROUP,
+                payload: res.data
+            });
+        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+};
+
+//ADD CANDIDATECATEGORY
+export const addCandidateCategory = (candidatecategory) => (dispatch, getState) => {
+    axios.post('/api/candidatecategory/', candidatecategory, tokenConfig(getState))
+        .then(res => {
+            dispatch(createMessage({candidateCategoryUpdated: "Candidate Categories Updated"}));
+            dispatch({
+                type: ADD_CANDIDATECATEGORY,
+                payload: res.data
+            });
+        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };

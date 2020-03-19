@@ -1,4 +1,10 @@
-import {ADD_CANDIDATE, DELETE_CANDIDATE, GET_CANDIDATECATEGORY, GET_CANDIDATES} from "../actions/types";
+import {
+    ADD_CANDIDATE,
+    ADD_CANDIDATECATEGORY,
+    DELETE_CANDIDATE,
+    GET_CANDIDATECATEGORY,
+    GET_CANDIDATES
+} from "../actions/types";
 
 const initialState = {
     candidates: [],
@@ -16,6 +22,11 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 candidates: [...state.candidates, action.payload]
+            };
+        case ADD_CANDIDATECATEGORY:
+            return {
+                ...state,
+                candidatecategory: [...state.candidatecategory, action.payload]
             };
         case GET_CANDIDATECATEGORY:
             return {

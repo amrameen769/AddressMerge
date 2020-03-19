@@ -4,7 +4,8 @@ import Col from "react-bootstrap/Col";
 import {CountryDropdown, RegionDropdown, CountryRegionData} from 'react-country-region-selector';
 import {connect} from "react-redux";
 import PropTypes from 'prop-types';
-import {addSponsor, getSponsorGroups} from "../../actions/core";
+import {addSponsor, addSponsorGroup, getSponsorGroups} from "../../actions/core";
+import AddCategory from "./AddCategory";
 
 export class AddSponsor extends Component {
     constructor(props) {
@@ -141,6 +142,11 @@ export class AddSponsor extends Component {
                                             value={sponsorgroup.id}>{sponsorgroup.groupName}</option>
                                 ))}
                             </Form.Control>
+                            <AddCategory
+                                name={"sponsorGroup"}
+                                action={"Add Sponsor Group"}
+                                method={this.props.addSponsorGroup}
+                            />
                         </Form.Group>
                     </Form.Row>
 
@@ -158,4 +164,4 @@ const mapStateToProps = state => ({
 });
 
 
-export default connect(mapStateToProps, {addSponsor, getSponsorGroups})(AddSponsor);
+export default connect(mapStateToProps, {addSponsor, getSponsorGroups, addSponsorGroup})(AddSponsor);
