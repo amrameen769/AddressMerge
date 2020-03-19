@@ -8,7 +8,8 @@ import Col from "react-bootstrap/Col";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import ActionAlert from "../layout/ActionAlert";
-import {updateCandidate} from "../../actions/candidates";
+import {addCandidateCategory, updateCandidate} from "../../actions/candidates";
+import AddCategory from "./AddCategory";
 
 class UpdateCandidate extends Component {
     constructor(props) {
@@ -156,6 +157,11 @@ class UpdateCandidate extends Component {
                                               value={category.id}>{category.categoryName}</MenuItem>
                                 ))}
                             </Select>
+                            <AddCategory
+                                name={"candidateCategory"}
+                                action={"Add Candidate Group"}
+                                method={this.props.addCandidateCategory}
+                            />
                         </Form.Group>
                         <Form.Group as={Col} controlId="formGridStateSponsor">
                             <Form.Label>Sponsor</Form.Label>
@@ -194,4 +200,4 @@ const mapStateToProps = state => ({
     sponsors: state.sponsors.sponsors
 });
 
-export default connect(mapStateToProps, {updateCandidate})(UpdateCandidate);
+export default connect(mapStateToProps, {updateCandidate, addCandidateCategory})(UpdateCandidate);

@@ -120,15 +120,3 @@ export const addSponsorGroup = (sponsorgroup) => (dispatch, getState) => {
             });
         }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };
-
-//ADD CANDIDATECATEGORY
-export const addCandidateCategory = (candidatecategory) => (dispatch, getState) => {
-    axios.post('/api/candidatecategory/', candidatecategory, tokenConfig(getState))
-        .then(res => {
-            dispatch(createMessage({candidateCategoryUpdated: "Candidate Categories Updated"}));
-            dispatch({
-                type: ADD_CANDIDATECATEGORY,
-                payload: res.data
-            });
-        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
-};

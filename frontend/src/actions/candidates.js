@@ -5,7 +5,7 @@ import {
     GET_CANDIDATES,
     GET_CANDIDATECATEGORY,
     DELETE_CANDIDATE,
-    ADD_CANDIDATE
+    ADD_CANDIDATE, ADD_CANDIDATECATEGORY
 } from "./types";
 
 //GET CANDIDATES
@@ -67,4 +67,16 @@ export const updateCandidate = (candidate) => (dispatch, getState) => {
             getCandidates();
         })
         .catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
+};
+
+//ADD CANDIDATECATEGORY
+export const addCandidateCategory = (candidatecategory) => (dispatch, getState) => {
+    axios.post('/api/candidatecategory/', candidatecategory, tokenConfig(getState))
+        .then(res => {
+            dispatch(createMessage({candidateCategoryUpdated: "Candidate Categories Updated"}));
+            dispatch({
+                type: ADD_CANDIDATECATEGORY,
+                payload: res.data
+            });
+        }).catch(err => dispatch(returnErrors(err.response.data, err.response.status)));
 };

@@ -8,7 +8,8 @@ import Col from "react-bootstrap/Col";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import ActionAlert from "../layout/ActionAlert";
-import {updateSponsor} from "../../actions/core";
+import {addSponsorGroup, updateSponsor} from "../../actions/core";
+import AddCategory from "./AddCategory";
 
 class UpdateSponsor extends Component {
     constructor(props) {
@@ -151,6 +152,11 @@ class UpdateSponsor extends Component {
                                               value={sponsorgroup.id}>{sponsorgroup.groupName}</MenuItem>
                                 ))}
                             </Select>
+                            <AddCategory
+                                name={"sponsorGroup"}
+                                action={"Add Sponsor Group"}
+                                method={this.props.addSponsorGroup}
+                            />
                         </Form.Group>
                     </Form.Row>
 
@@ -175,4 +181,4 @@ const mapStateToProps = state => ({
     sponsorgroups: state.sponsors.sponsorgroups
 });
 
-export default connect(mapStateToProps, {updateSponsor})(UpdateSponsor);
+export default connect(mapStateToProps, {updateSponsor, addSponsorGroup})(UpdateSponsor);

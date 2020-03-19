@@ -1,7 +1,8 @@
 from rest_framework import viewsets, permissions
 
-from .models import Sponsors, SponsorGroup, Candidates, CandidateCategory
-from .serializers import SponsorSerializer, SponsorGroupSerializer, CandidateSerializer, CandidateCategorySerializer
+from .models import Sponsors, SponsorGroup, Candidates, CandidateCategory, Donations
+from .serializers import SponsorSerializer, SponsorGroupSerializer, CandidateSerializer, CandidateCategorySerializer, \
+    DonationsSerializer
 
 
 # Sponsor ViewSet
@@ -20,12 +21,14 @@ class SponsorViewset(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
+# SponsorGroupViewset
 class SponsorGroupViewset(viewsets.ModelViewSet):
     queryset = SponsorGroup.objects.all()
 
     serializer_class = SponsorGroupSerializer
 
 
+# CandidateViewset
 class CandidateViewset(viewsets.ModelViewSet):
     queryset = Candidates.objects.all()
 
@@ -35,7 +38,18 @@ class CandidateViewset(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
+# CandidateCategoryViewset
 class CandidateCategoryViewset(viewsets.ModelViewSet):
     queryset = CandidateCategory.objects.all()
 
     serializer_class = CandidateCategorySerializer
+
+
+# DonationsViewset
+class DonationsViewset(viewsets.ModelViewSet):
+    queryset = Donations.objects.all()
+
+    serializer_class = DonationsSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)

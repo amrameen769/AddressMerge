@@ -30,27 +30,11 @@ class Sponsors(models.Model):
         return self.firstName
 
 
-class Documents(models.Model):
-    docName = models.CharField(max_length=100)
-    docType = models.CharField(max_length=30)
-    docContent = models.TextField(blank=True)
-    lastEdited = models.DateTimeField(auto_now_add=True)
-    isTemplate = models.BooleanField(default=False)
-    owner = models.ForeignKey(User, related_name="documents", on_delete=models.CASCADE, null=True)
-
-
 class CandidateCategory(models.Model):
     categoryName = models.CharField(max_length=50)
 
     def __str__(self):
         return self.categoryName
-
-
-class Donations(models.Model):
-    donationName = models.CharField(max_length=50)
-    donationDescription = models.TextField(blank=True)
-    donationDate = models.DateTimeField(auto_now_add=True)
-    donationAmount = models.FloatField(blank=True)
 
 
 class Candidates(models.Model):
@@ -66,11 +50,31 @@ class Candidates(models.Model):
     city = models.CharField(max_length=100, blank=True)
     zip = models.CharField(max_length=10, blank=True)
     sponsorId = models.ForeignKey(Sponsors, related_name="sponsoridname", on_delete=models.CASCADE, null=True)
-    donationId = models.ForeignKey(Donations, related_name="donationidname", on_delete=models.CASCADE, null=True,
-                                   blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     status = models.BooleanField(default=True)
     owner = models.ForeignKey(User, related_name="candidateownername", on_delete=models.CASCADE, null=True)
 
     def __str__(self):
         return self.candidateFirstName
+
+
+class Donations(models.Model):
+    donationName = models.CharField(max_length=50)
+    donationDescription = models.TextField(blank=True)
+    donationDate = models.DateTimeField()
+    donationAmount = models.FloatField(blank=True)
+    donationTo = models.ForeignKey(Candidates, related_name="candidate_name", on_delete=models.CASCADE, null=True)
+    donationBy = models.ForeignKey(Sponsors, related_name="sponsor_name", on_delete=models.CASCADE, null=True)
+    owner = models.ForeignKey(User, related_name="donationownername", on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.donationName
+
+
+class Documents(models.Model):
+    docName = models.CharField(max_length=100)
+    docType = models.CharField(max_length=30)
+    docContent = models.TextField(blank=True)
+    lastEdited = models.DateTimeField(auto_now_add=True)
+    isTemplate = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, related_name="documents", on_delete=models.CASCADE, null=True)

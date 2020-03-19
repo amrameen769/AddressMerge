@@ -6,7 +6,7 @@ import {connect} from "react-redux";
 import PropTypes from 'prop-types';
 import {getCandidateCategory, addCandidate} from "../../actions/candidates";
 import AddCategory from "./AddCategory";
-import {addCandidateCategory} from "../../actions/core";
+import {addCandidateCategory} from "../../actions/candidates";
 
 class AddCandidate extends Component {
     constructor(props) {

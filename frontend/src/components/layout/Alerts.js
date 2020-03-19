@@ -32,6 +32,9 @@ export class Alerts extends Component {
             if(message.candidateUpdated) alert.success(message.candidateUpdated);
             if(message.candidateCategoryUpdated) alert.success(message.candidateCategoryUpdated);
             if(message.sponsorgroupUpdated) alert.success(message.sponsorgroupUpdated);
+            if(message.donationAdded) alert.success(message.donationAdded);
+            if(message.donationDeleted) alert.success(message.donationDeleted);
+            if(message.donationUpdated) alert.success(message.donationUpdated);
         }
     }
 

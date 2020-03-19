@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import Jumbotron from "react-bootstrap/Jumbotron";
-import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
 // import {HashRouter as Router, Link, Route, Switch} from "react-router-dom";
 // import {Merger} from "../core/Merger";
